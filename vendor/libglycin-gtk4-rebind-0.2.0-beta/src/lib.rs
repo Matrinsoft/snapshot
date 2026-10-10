@@ -1,0 +1,23 @@
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![allow(clippy::needless_doctest_main)]
+//! # Rust GlycinGtk4 bindings
+//!
+//! This library contains safe Rust bindings for [Glycin](https://gitlab.gnome.org/GNOME/glycin).
+
+// Re-export the -sys bindings
+pub use ffi;
+pub use gdk;
+pub use gio;
+pub use gly;
+
+/// Asserts that this is the main thread and `gtk::init` has been called.
+macro_rules! assert_initialized_main_thread {
+    () => {};
+}
+
+#[allow(unused_imports)]
+#[allow(clippy::let_and_return)]
+#[allow(clippy::type_complexity)]
+mod auto;
+
+pub use auto::functions::*;

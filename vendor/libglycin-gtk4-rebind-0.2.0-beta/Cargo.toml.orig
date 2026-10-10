@@ -1,0 +1,38 @@
+[package]
+name = "libglycin-gtk4-rebind"
+version = "0.2.0-beta"
+authors = ["Maximiliano Sandoval <msandova@gnome.org>"]
+edition.workspace = true
+rust-version.workspace = true
+readme = "../README.md"
+description = "Safe bindings for libglycin-gtk4"
+license = "MIT"
+homepage.workspace = true
+repository.workspace = true
+# TODO
+# documentation = ""
+categories = ["api-bindings", "gui"]
+keywords = ["gtk4-rs", "gnome", "glycin", "GUI"]
+exclude = ["Gir.toml"]
+
+[features]
+v2_2 = []
+
+[package.metadata.docs.rs]
+all-features = true
+
+[dependencies]
+libc.workspace = true
+glib.workspace = true
+gio.workspace = true
+gdk.workspace = true
+
+[dependencies.gly]
+package = "libglycin-rebind"
+path = "../libglycin-rebind"
+version = "0.2.0-beta"
+
+[dependencies.ffi]
+package = "libglycin-gtk4-rebind-sys"
+path = './sys'
+version = "0.2.0-beta"

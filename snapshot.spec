@@ -45,6 +45,13 @@ License:        %{shrink:
 # LICENSE.dependencies contains a full license breakdown
 URL:            https://gitlab.gnome.org/GNOME/snapshot
 Source:         https://download.gnome.org/sources/%{name}/%{gnome_major_version}/%{name}-%{gnome_tarball_version}.tar.xz
+# To create the vendor tarball:
+#   tar Jxvf %{name}-%%{gnome_tarball_version}.tar.xz ; \
+#   pushd %{name}-%%{gnome_tarball_version} ; \
+#   cargo vendor --versioned-dirs ; \
+#   tar Jcvf ../%{name}-%%{gnome_tarball_version}-vendor.tar.xz vendor/ ; \
+#   popd
+Source1:        %{name}-%{gnome_tarball_version}-vendor.tar.xz
 
 %gnome_check_version
 
@@ -88,11 +95,11 @@ Take pictures and videos on your computer, tablet, or phone.
 
 
 %prep
-%autosetup -p1 -n %{name}-%{gnome_tarball_version}
-
 %if %{with bundled_rust_deps}
+%autosetup -p1 -n %{name}-%{gnome_tarball_version} -a1
 %cargo_prep -v vendor
 %else
+%autosetup -p1 -n %{name}-%{gnome_tarball_version}
 rm -rf vendor
 %cargo_prep
 %endif
